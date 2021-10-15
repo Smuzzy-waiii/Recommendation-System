@@ -191,19 +191,22 @@ def main():
         return result
 
     def check():
-        global result
-        if anime=="Kimetsu no Yaiba":
-            result= get_recommendation("Kimetsu no Yaiba")
-        if anime=="Yakusoku no Neverland":
-            result= get_recommendation("Yakusoku no Neverland")
+        try:
+            global result
+            if anime.get()=="Kimetsu no Yaiba":
+                result= get_recommendation("Kimetsu no Yaiba")
+            if anime.get()=="Yakusoku no Neverland":
+                result= get_recommendation("Yakusoku no Neverland")
 
-        print("*"*40+"\n Recommendation for '{}'\n".format(anime)+"*"*40)
-        print(result.head())
+            print("*"*40+"\n Recommendation for '{}'\n".format(anime)+"*"*40)
+            print(result.head())
 
-        reco = list(result.index[:4].values)
-        reco.extend(["Yakusoku no Neverland"])
-        sub_graph = get_all_adj_nodes(reco)
-        draw_sub_graph(sub_graph)
+            reco = list(result.index[:4].values)
+            reco.extend(["Yakusoku no Neverland"])
+            sub_graph = get_all_adj_nodes(reco)
+            draw_sub_graph(sub_graph)
+        except:
+             messagebox.showerror(title="Invalid Entry", message="Please enter a valid name")   
 
     #Entries
     entry_label= tk.Label(lower_frame, text="Enter your favourite anime: ", bg='#FAEBD7', font=("Arial", 12))
@@ -218,6 +221,3 @@ def main():
     submit_button.grid(column=2, row=4)
     #result = get_recommendation("Kimetsu no Yaiba")
     #result2 = get_recommendation("Yakusoku no Neverland")
-    
-main()
-root.mainloop()
