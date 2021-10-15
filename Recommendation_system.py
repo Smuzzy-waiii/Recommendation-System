@@ -198,9 +198,20 @@ def main():
             if anime.get()=="Yakusoku no Neverland":
                 result= get_recommendation("Yakusoku no Neverland")
 
-            print("*"*40+"\n Recommendation for '{}'\n".format(anime)+"*"*40)
-            print(result.head())
+            #print("*"*40+"\n Recommendation for '{}'\n".format(anime)+"*"*40)
+            #print(result.head())
+            forget_pack()
+            forget_grid()
+            main_title = tk.Label(title_frame, text="RECOMMENDED FOR YOU!!", bg='#FAEBD7', font=("Helvetica", 16))
+            main_title.pack()
+            t1= "*"*40+"\n Recommendation for '{}'\n".format(anime)+"*"*40
+            t2= result.head()
+            final1 = tk.Label(lower_frame, text=t1, bg='#FAEBD7', font=("Helvetica", 12))
+            final1.pack()
+            final2 = tk.Label(lower_frame, text=t2, bg='#FAEBD7', font=("Helvetica", 12))
+            final2.pack()
 
+            #On the terminal
             reco = list(result.index[:4].values)
             reco.extend(["Yakusoku no Neverland"])
             sub_graph = get_all_adj_nodes(reco)
@@ -221,3 +232,7 @@ def main():
     submit_button.grid(column=2, row=4)
     #result = get_recommendation("Kimetsu no Yaiba")
     #result2 = get_recommendation("Yakusoku no Neverland")
+    
+main()
+root.mainloop()
+
